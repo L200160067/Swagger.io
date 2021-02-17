@@ -1,0 +1,2268 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Education API",
+    "description": "Tops API version 1.0.0",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/L200160067/Try3/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://virtserver.swaggerhub.com/mortezabonakdar/ghiwioufgerigf/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "http://tops.mtamadon.ir/api/v1",
+      "description": "Dev Server"
+    },
+    {
+      "url": "https://topsito.ir/api/v1.1",
+      "description": "production Server"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "education-student",
+      "description": "Student education"
+    },
+    {
+      "name": "education-teacher",
+      "description": "Teacher education"
+    }
+  ],
+  "paths": {
+    "/student/educations/": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Search education",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "course_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "teacher_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/teachers/search": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Search teachers",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/inline_response_200_1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/{id}": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Show education by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "education uuid",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/enrollments": {
+      "post": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Show student enrollments",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/enrollments/{id}": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Showing enrolled education by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "education ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "enroll an education by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "education ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/chapters/{id}": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Show chapter contents by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "chapter ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/inline_response_200_5"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "finish a chapter",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "chapter ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/quizzes/{id}": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Show quiz questions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "content ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/inline_response_200_7"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/educations/files/{key}": {
+      "get": {
+        "tags": [
+          "education-student"
+        ],
+        "summary": "Getting private file URL",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/": {
+      "get": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "Search educations",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "pagination",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "course_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stage_id",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_9"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "store education",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/{id}": {
+      "get": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "show education by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "education_id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_10"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "update education by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "education ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/chapters": {
+      "post": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "store chapter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/chapters/{id}": {
+      "get": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "get chapter contents by chapter ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "chapter ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/inline_response_200_11"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "update a chapter by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "chapter ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_3"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "delete a chapter by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "chapter ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_12"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/contents": {
+      "post": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "store chapter content",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_4"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/contents/{id}": {
+      "put": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "update chapter contents",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "content ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_5"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201_3"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "delete a content by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "content ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_13"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/quizzes/{id}": {
+      "get": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "show quiz questions by content ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "content ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_14"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/educations/questions": {
+      "post": {
+        "tags": [
+          "education-teacher"
+        ],
+        "summary": "store question",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_6"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_14"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Student-Education": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "integer"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "paePage": {
+            "type": "integer"
+          },
+          "lastPage": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inline_response_200_2"
+            }
+          }
+        }
+      },
+      "inline_response_200_1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "disk_limit": {
+            "type": "integer",
+            "example": 2000
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "inline_response_200_2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "format": "json",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "publish_request": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "data-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "has_exam": {
+            "type": "boolean"
+          },
+          "finalPrice": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_3": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "perPage": {
+            "type": "integer"
+          },
+          "lastPage": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inline_response_200_3_data"
+            }
+          }
+        }
+      },
+      "inline_response_200_4": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/inline_response_200_4_data"
+          }
+        }
+      },
+      "inline_response_201": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "ثبت نام شما با موفقیت انجام شد."
+          }
+        }
+      },
+      "inline_response_200_5": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "content": {
+            "type": "string",
+            "format": "text"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "file_key": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_6": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "این بخش پایان یافت"
+          },
+          "remaining_chapters": {
+            "type": "integer"
+          },
+          "eduction_finished": {
+            "type": "boolean"
+          }
+        }
+      },
+      "studenteducationsquizzesid_options_list": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "is_correct": {
+            "type": "boolean"
+          }
+        }
+      },
+      "inline_response_200_7": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "question": {
+            "type": "string",
+            "format": "text"
+          },
+          "answer": {
+            "type": "string",
+            "format": "text"
+          },
+          "options_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/studenteducationsquizzesid_options_list"
+            }
+          },
+          "content_id": {
+            "type": "integer"
+          },
+          "exam_id": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          }
+        }
+      },
+      "inline_response_200_8": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_200_9": {
+        "type": "object",
+        "properties": {
+          "schema": {
+            "$ref": "#/components/schemas/inline_response_200_9_schema"
+          }
+        }
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "course_id": {
+            "type": "integer"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_201_1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/inline_response_200_9_schema_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "publish_request": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "has_exam": {
+            "type": "boolean"
+          },
+          "final_price": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_10": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/inline_response_200_9_schema_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "publish_request": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "has_exam": {
+            "type": "boolean"
+          },
+          "final_price": {
+            "type": "integer"
+          },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inline_response_200_10_chapters"
+            }
+          }
+        }
+      },
+      "body_1": {
+        "type": "object",
+        "properties": {
+          "course_id": {
+            "type": "integer"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "body_2": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_201_2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/inline_response_201_2_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "teachereducationschaptersid_draft": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "file_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_11": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "content": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "file_key": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/teachereducationschaptersid_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "body_3": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_12": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "حذف گردید"
+          }
+        }
+      },
+      "body_4": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_201_3": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "content": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "file_key": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/teachereducationschaptersid_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "body_5": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_13": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "حذف گردید."
+          }
+        }
+      },
+      "inline_response_200_14": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "options_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/studenteducationsquizzesid_options_list"
+            }
+          },
+          "content_id": {
+            "type": "integer"
+          },
+          "exam_id": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/body_6"
+          }
+        }
+      },
+      "body_6": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "options_list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/studenteducationsquizzesid_options_list"
+            }
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_200_3_data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "publish_request": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "data-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "has_exam": {
+            "type": "boolean"
+          },
+          "finalPrice": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_4_data_chapters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "format": "json",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "data-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "inline_response_200_4_data": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "type": "array",
+            "format": "json",
+            "items": {
+              "type": "object"
+            }
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "publish_request": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "data-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "has_exam": {
+            "type": "boolean"
+          },
+          "finalPrice": {
+            "type": "integer"
+          },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inline_response_200_4_data_chapters"
+            }
+          }
+        }
+      },
+      "inline_response_200_9_schema_draft": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_200_9_schema_data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course_id": {
+            "type": "integer"
+          },
+          "course_title": {
+            "type": "string"
+          },
+          "category_id": {
+            "type": "integer"
+          },
+          "category_title": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "teacher_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "teacher_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer"
+          },
+          "discounted_price": {
+            "type": "integer"
+          },
+          "price_type": {
+            "type": "string"
+          },
+          "special_price": {
+            "type": "integer"
+          },
+          "special_expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "claps": {
+            "type": "integer"
+          },
+          "text_count": {
+            "type": "integer"
+          },
+          "audio_count": {
+            "type": "integer"
+          },
+          "video_count": {
+            "type": "integer"
+          },
+          "image_count": {
+            "type": "integer"
+          },
+          "quiz_count": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/inline_response_200_9_schema_draft"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "data-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finalPrice": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_9_schema": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "paePage": {
+            "type": "integer"
+          },
+          "lastPage": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inline_response_200_9_schema_data"
+            }
+          }
+        }
+      },
+      "inline_response_200_10_draft": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_10_chapters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "education_id": {
+            "type": "integer"
+          },
+          "is_published": {
+            "type": "boolean"
+          },
+          "draft": {
+            "$ref": "#/components/schemas/inline_response_200_10_draft"
+          },
+          "delete_request": {
+            "type": "boolean"
+          },
+          "draft_priority": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "inline_response_201_2_draft": {
+        "type": "object",
+        "properties": {
+          "education_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
