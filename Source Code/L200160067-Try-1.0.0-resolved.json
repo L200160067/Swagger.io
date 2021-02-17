@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Student API",
+    "description": "Student Demo API",
+    "contact": {
+      "name": "Alfarez",
+      "url": "http://tutorialspedia.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/L200160067/Try/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "http://devapi.com"
+    },
+    {
+      "url": "http://prodapi.com"
+    }
+  ],
+  "paths": {
+    "/student": {
+      "description": "Student Resource",
+      "get": {
+        "description": "Operation to Fetch Student",
+        "parameters": [
+          {
+            "name": "studentname",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Farez"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/students"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Add a new Student",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/student"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Record successfuly added"
+          }
+        }
+      }
+    },
+    "/student{id}": {
+      "description": "Get Studdent Based on Path Parameter",
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/students"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "student": {
+        "type": "object",
+        "properties": {
+          "StudentID": {
+            "type": "integer",
+            "example": 3
+          },
+          "StudentName": {
+            "type": "string",
+            "example": "David"
+          },
+          "StudentRemarks": {
+            "type": "string",
+            "example": "High Grade Student"
+          }
+        }
+      },
+      "students": {
+        "type": "string",
+        "example": "High Grade Student"
+      }
+    }
+  }
+}
