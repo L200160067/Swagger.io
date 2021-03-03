@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OAuth Authorization Server",
+    "description": "The OAuth Authorization Server provides APIs for authentication and authorization.<br> Especially, it provides APIs for requesting access tokens and retrieving the public key used for signing Json Web Tokens issued by the OAuth Authorization Server.<br><br> <i>Note:</i>The endpoints described below are application provider-specific and environment-specifc.<br>  Generic pattern: <i>https://&lt;application-provider-name&gt;.piam.&lt;environment&gt;</i><i>.mindsphere.io</i>",
+    "version": "3.0",
+    "x-released": "yes",
+    "x-visbility": "external"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "token_endpoint",
+      "description": "OAuth 2.0 Token Endpoint (see RFC 6749)"
+    },
+    {
+      "name": "token_keys_endpoint",
+      "description": "An endpoint which returns the list of public keys used for token signing (see also RFC 7517, 7518). <i>Note:</i>The RSA modulus and exponent may start with leading \"0\" byte (in contrast to RFC 7518)."
+    }
+  ],
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "token_endpoint"
+        ],
+        "operationId": "tokenEndpointClientCredentialsGrant",
+        "summary": "Client Credentials Grant",
+        "description": "OAuth 2.0 Client Credentials Grant (see RFC 6749). Endpoint requires client authentication via Authorization header using \"Basic\" scheme (see RFC 7617).",
+        "parameters": [
+          {
+            "name": "grant_type",
+            "type": "string",
+            "in": "formData",
+            "description": "Value MUST be set to \"client_credentials\"."
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/token_keys": {
+      "get": {
+        "tags": [
+          "token_keys_endpoint"
+        ],
+        "operationId": "tokenKeysEndpoint",
+        "summary": "Token keys endpoint",
+        "description": "The endpoint returns the list of public keys used for token signing (see also RFC 7517, 7518). <i>Note:</i>The RSA modulus and exponent may start with leading \"0\" byte (in contrast to RFC 7518).",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TokenKeysResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "definitions": {
+    "AccessTokenResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "example": "ey..."
+        },
+        "token_type": {
+          "type": "string",
+          "example": "Bearer"
+        },
+        "expires_in": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1800
+        },
+        "scope": {
+          "type": "string",
+          "example": "api.read api.write"
+        },
+        "jti": {
+          "type": "string",
+          "example": "b019ceb63513456c88f2d67c0e92d35b"
+        }
+      }
+    },
+    "TokenKeysResponse": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonWebKeyIncl0"
+          }
+        }
+      }
+    },
+    "JsonWebKeyIncl0": {
+      "type": "object",
+      "properties": {
+        "kty": {
+          "type": "string",
+          "example": "RSA"
+        },
+        "e": {
+          "type": "string",
+          "example": "AQAB"
+        },
+        "use": {
+          "type": "string",
+          "example": "sig"
+        },
+        "kid": {
+          "type": "string",
+          "example": "key-id-1"
+        },
+        "n": {
+          "type": "string",
+          "example": "AJYu9cMVw4JUqt_X2F7Q3n68aRdtJljwpcVcIr4kp18xbSFt77U8-6bYbygYtLMHEJt5_i5WrQUbOvmrjz4sO4jQShhhkoKPtd0Uee3Ofm47cRsjRtQm7ZoyI16eTaFfs1ed7vCIIl73ZROYYTBfKsh7GTtvtuJsbLHKJWNTih8fI05gsmX-nyx0JkTBXVjzAOxnzWLJrBnPCO4gPmrKl0c0V7HIW00yrn2XHhnE8nBJBAPgq_AyIPCTVT7n9RVRwCx8P8IWnM_nS4-EZs4cPyauioZ0ua-EV7ybJd7KI-GJ-MZWDT1RhRLycD5aWBzUiEoHGY1WfwnZiKRatrcrz30"
+        }
+      }
+    }
+  }
+}
