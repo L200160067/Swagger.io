@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Staff OAuth Authentication API",
+    "description": "Staff OAuth Authentication API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/srinipatil02/Staff-Authenticate-OAuth/1.0.0"
+    }
+  ],
+  "paths": {
+    "/token": {
+      "post": {
+        "summary": "return an accesstoken in exchange for user credentials",
+        "description": "return an accesstoken in exchange for user credentials",
+        "requestBody": {
+          "description": "user credentials to validation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentials"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "user validated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "not authorized",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "user credentials"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserCredentials": {
+        "required": [
+          "client-id",
+          "password",
+          "scope",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "client-id": {
+            "type": "string",
+            "format": "string"
+          },
+          "username": {
+            "type": "string",
+            "format": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "string"
+          },
+          "scope": {
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "AccessToken": {
+        "required": [
+          "access_token",
+          "expires_in",
+          "refresh_token",
+          "refresh_token_expires_in",
+          "scope"
+        ],
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "format": "string",
+            "example": "0bFFVikmYKpoYlYscQjqJXD3g5Ug"
+          },
+          "scope": {
+            "type": "string",
+            "format": "string",
+            "example": "admin"
+          },
+          "expires_in": {
+            "type": "string",
+            "format": "string",
+            "example": "599"
+          },
+          "refresh_token": {
+            "type": "string",
+            "format": "string",
+            "example": "pH0HDqQehPrHGBrzNAJBd8YdcFc5vgAv"
+          },
+          "refresh_token_expires_in": {
+            "type": "string",
+            "format": "string",
+            "example": "17279999"
+          }
+        }
+      }
+    }
+  }
+}
